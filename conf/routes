@@ -11,4 +11,4 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 GET     /about                      controllers.HomeController.about()
 
-GET     /welcome/:name               controllers.HomeController.welcome(name)
+GET     /welcome/:name/:lastName    controllers.HomeController.welcomePage(name,lastName)

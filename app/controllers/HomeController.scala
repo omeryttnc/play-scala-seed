@@ -5,6 +5,7 @@ import org.apache.pekko.http.scaladsl.model.HttpHeader.ParsingResult.Ok
 import javax.inject._
 import play.api.mvc._
 
+
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
@@ -19,16 +20,15 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    * will be called when the application receives a `GET` request with
    * a path of `/`.
    */
-  def index() = Action { implicit request: Request[AnyContent] =>
-    var number =2
+  def index(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.index())
   }
 
   def about(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok("https://www.youtube.com/watch?v=HvyHJuC3fRM&list=PLYPFxrXyK0Bx9SBkNhJr1e2-NlIq4E7ED&index=9&ab_channel=RadixCode")
+    Ok("about")
   }
 
-  def welcome(name:String)= Action{implicit request: Request[AnyContent]  =>
-    Ok(name)
+  def welcomePage(name:String,lastName:String): Action[AnyContent] = Action{ implicit request: Request[AnyContent]  =>
+    Ok(views.html.Home.welcome(name,lastName))
   }
 }
