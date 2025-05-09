@@ -11,4 +11,16 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 GET     /about                      controllers.HomeController.about()
 
+
+# BOOKS
+GET     /books                      controllers.BooksController.index()
+GET     /books/create               controllers.BooksController.create()
+POST    /books/create               controllers.BooksController.save()
+GET     /books/edit/:id             controllers.BooksController.edit(id:Int)
+POST    /books/edit                 controllers.BooksController.update()
+GET     /books/delete/:id           controllers.BooksController.destroy(id:Int)
+GET     /books/:id                  controllers.BooksController.show(id:Int)
+
+
+
 GET     /welcome/:name/:lastName    controllers.HomeController.welcomePage(name,lastName)

@@ -7,37 +7,37 @@ class BooksController @Inject()(val controllerComponents: ControllerComponents) 
 
   // for all books
   def index(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.index())
+    Ok("index")
   }
 
   // to create book
   def create(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.index())
+    Ok("create")
   }
 
   // to save book
   def save(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.index())
+    Ok("save")
   }
 
   // to edit
   def edit(id: Int): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.index())
+    Ok(s"edit $id")
   }
 
   // update
   def update(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.index())
+    Ok("update")
   }
 
   // destroy
   def destroy(id: Int): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.index())
+    Ok(s"destroy $id")
   }
 
   // for book details
   def show(id: Int): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.index())
+    Ok(s"show $id")
   }
 
 }
