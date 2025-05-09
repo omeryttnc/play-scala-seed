@@ -1,13 +1,16 @@
 package controllers
 
 import com.google.inject.Inject
+import models.{Book, BookRepository}
 import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents, Request}
 
 class BooksController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
 
   // for all books
   def index(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok("index")
+    val books: List[Book] = BookRepository.allBooks
+
+    Ok(views.html.books.books(books))
   }
 
   // to create book

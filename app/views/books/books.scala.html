@@ -1,0 +1,20 @@
+@(books: List[Book])
+
+<html lang="en">
+<head>
+    <title>All Books</title>
+</head>
+<body>
+<h1>All Books</h1>
+
+@for(book <- books) {
+<div>
+    <a href="#">@book.title</a>
+    <p>Price: @book.price</p>
+    <p>Author: @book.author</p>
+</div>
+}
+
+<p>Total Books: @books.size</p>
+</body>
+</html>
