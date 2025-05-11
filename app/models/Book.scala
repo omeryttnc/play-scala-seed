@@ -17,8 +17,9 @@ object BookRepository {
   def findById(id: Int): Option[Book] =
     books.find(book => book.id == id)
 
-  def add(book: Book): List[Book] =
-    books :+ book
+  def add(book: Book): Unit = {
+    books = books :+ book
+  }
 
   def remove(book: Book): Boolean =
     if (books.contains(book)) {

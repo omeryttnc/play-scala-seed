@@ -1,3 +1,4 @@
+@import views.html.helper.CSRF
 @(bookForm: Form[Book])(implicit request: RequestHeader, messages: Messages)
 
 
@@ -5,6 +6,7 @@
     <h1>Create a New Book</h1>
 
     @helper.form(action = routes.BooksController.save()) {
+        @CSRF.formField // Bu satır, CSRF token'ını form'a ekler.
 
         @helper.inputText(bookForm("id"), Symbol("_label") -> "ID")
         @helper.inputText(bookForm("title"), Symbol("_label") -> "Title")

@@ -35,22 +35,20 @@ class BooksController @Inject()(val controllerComponents: ControllerComponents) 
 
   // to save book
   def save(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-//    implicit val messages: Messages = messagesApi.preferred(request)
-//
-//    bookForm.bindFromRequest.fold(
-//      formWithErrors => {
-//        // Hatalı form varsa tekrar göster
-//        BadRequest(views.html.books.create(formWithErrors))
-//      },
-//      bookData => {
-//        // Burada bookData: Book nesnesi olur
-//        // İstersen veritabanına kaydedebilirsin
-//        Ok(s"Book saved: ${bookData.title}")
-//      }
-//    )
-    println("save method is called ")
-    Ok("")
+    implicit val messages: Messages = messagesApi.preferred(request)
+
+    bookForm.bindFromRequest.fold(
+      formWithErrors => {
+        // Hatalı form tekrar gösterilsin
+        BadRequest(views.html.books.create(formWithErrors))
+      },
+      bookData => {
+        BookRepository.add(bookData)
+        Redirect(routes.BooksController.index()).flashing("success" -> "Book saved")
+      }
+    )
   }
+
 
   // to edit
   def edit(id: Int): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
