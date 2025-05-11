@@ -18,11 +18,11 @@ object BookRepository {
     books.find(book => book.id == id)
 
   def add(book: Book): List[Book] =
-    books :+ book  // List'lere eleman eklerken :+ kullanılır
+    books :+ book
 
   def remove(book: Book): Boolean =
     if (books.contains(book)) {
-      books = books.filterNot(b => b == book) // List'ten eleman çıkartmak için filterNot kullanılır
+      books = books.filterNot(b => b == book)
       true
     } else
       false
