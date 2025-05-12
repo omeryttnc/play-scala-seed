@@ -1,5 +1,7 @@
 package models
 
+import play.api.data.Form
+
 case class Book(id: Int, title: String, price: Int, author: String)
 
 object BookRepository {
@@ -19,6 +21,10 @@ object BookRepository {
 
   def add(book: Book): Unit = {
     books = books :+ book
+  }
+
+  def edit(book: Book):Unit={
+
   }
 
   def remove(book: Book): Boolean =

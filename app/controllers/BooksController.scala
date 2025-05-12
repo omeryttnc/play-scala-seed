@@ -9,11 +9,11 @@ import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents, R
 
 class BooksController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
 
-  val bookForm: Form[Book]=Form(
+  val bookForm: Form[Book] = Form(
     mapping(
-      "id"     -> number,
-      "title"  -> nonEmptyText,
-      "price"  -> number,
+      "id" -> number,
+      "title" -> nonEmptyText,
+      "price" -> number,
       "author" -> nonEmptyText
     )(Book.apply)(Book.unapply)
   )
@@ -52,7 +52,18 @@ class BooksController @Inject()(val controllerComponents: ControllerComponents) 
 
   // to edit
   def edit(id: Int): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok(s"edit $id")
+    val book: Option[Book] = BookRepository.findById(id): Option[Book]
+    implicit val messages: Messages = messagesApi.preferred(request)
+
+    bookForm.bindFromRequest.fill(book.get).fold(
+      formWithErrors => {
+        // Hatalı form tekrar gösterilsin
+        BadRequest(views.html.books.create(formWithErrors))
+      },
+      bookData=>{
+        Redirect(routes.BooksController.index())
+      }
+    )
   }
 
   // update

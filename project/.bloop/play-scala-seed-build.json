@@ -268,7 +268,7 @@
         "platform": {
             "name": "jvm",
             "config": {
-                "home": "C:\\Program Files\\Java\\jdk-17",
+                "home": "C:\\Users\\savsa\\.jdks\\ms-11.0.27",
                 "options": [
                     "-Duser.dir=D:\\Projelerim\\SCALA\\youtube_project\\play-scala-seed\\project"
                 ]
@@ -277,7 +277,7 @@
                 
             ],
             "runtimeConfig": {
-                "home": "C:\\Program Files\\Java\\jdk-17",
+                "home": "C:\\Users\\savsa\\.jdks\\ms-11.0.27",
                 "options": [
                     "-Duser.dir=D:\\Projelerim\\SCALA\\youtube_project\\play-scala-seed\\project"
                 ]
