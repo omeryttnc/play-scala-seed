@@ -15,15 +15,17 @@ object SQLiteExample {
 
     try {
       val stmt = conn.createStatement()
-      stmt.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)")
+      stmt.execute("CREATE TABLE IF NOT EXISTS Book (id INTEGER PRIMARY KEY, title TEXT, price INTEGER, author TEXT)")
 
-      stmt.execute("INSERT INTO users (name) VALUES ('Alice')")
-      stmt.execute("INSERT INTO users (name) VALUES ('Bob')")
+      stmt.execute("INSERT INTO Book (title,price,author) VALUES ('Alice title 1',22,'Alice 1')")
+      stmt.execute("INSERT INTO Book (title,price,author) VALUES ('Alice title 2',22,'Alice 2')")
+      stmt.execute("INSERT INTO Book (title,price,author) VALUES ('Alice title 3',22,'Alice 3')")
+      stmt.execute("INSERT INTO Book (title,price,author) VALUES ('Alice title 4',22,'Alice 4')")
 
-      val rs: ResultSet = stmt.executeQuery("SELECT * FROM users")
-      while (rs.next()) {
-        println(s"User: ${rs.getInt("id")} - ${rs.getString("name")}")
-      }
+//      val rs: ResultSet = stmt.executeQuery("SELECT * FROM Book")
+//      while (rs.next()) {
+//        println(s"User: ${rs.getInt("id")} - ${rs.getString("name")}")
+//      }
     } finally {
       conn.close()
     }
