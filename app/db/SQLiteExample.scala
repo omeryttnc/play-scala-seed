@@ -1,10 +1,14 @@
 package db
 
 import java.sql.{Connection, DriverManager, ResultSet}
+import java.io.File
 
 object SQLiteExample {
   def main(args: Array[String]): Unit = {
-    val url = "jdbc:sqlite:database.db" // This creates a new file `sample.db` in your project directory
+
+    val file = new File("app/db/database.db")
+    val database = file.getAbsolutePath.replace("/", "\\")
+    val url = s"jdbc:sqlite:$database" // This creates a new file `sample.db` in your project directory
 
     // Connect to SQLite
     val conn: Connection = DriverManager.getConnection(url)
