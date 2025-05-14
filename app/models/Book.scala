@@ -11,7 +11,7 @@ object BookRepository {
     Book(3, "book3", 233, "omer3"),
     Book(4, "book5", 234, "omer4")
   )
-  println(books)
+  println("all books : "+ books)
 
   def allBooks: List[Book] =
     books
@@ -23,7 +23,17 @@ object BookRepository {
     books = books :+ book
   }
 
-  def edit(book: Book):Unit={
+
+  def update(id: Int, book: Book): Unit = {
+    println(s"Updating book with id = $id")
+
+    books.find(_.id == id) match {
+      case Some(_) =>
+        books = books.filterNot(_.id == id) :+ book
+      case None =>
+        println(s"Book with id $id not found.")
+    }
+    println(s"Books after update: $books")
 
   }
 

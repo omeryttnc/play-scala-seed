@@ -37,10 +37,11 @@ class BooksController @Inject()(val controllerComponents: ControllerComponents) 
   def save(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     implicit val messages: Messages = messagesApi.preferred(request)
 
-    bookForm.bindFromRequest.fold(
+    bookForm.bindFromRequest().fold(
       formWithErrors => {
         // Hatalı form tekrar gösterilsin
         BadRequest(views.html.books.create(formWithErrors))
+        Redirect(routes.BooksController.index()).flashing("failed" -> "Book not saved")
       },
       bookData => {
         BookRepository.add(bookData)
@@ -55,21 +56,33 @@ class BooksController @Inject()(val controllerComponents: ControllerComponents) 
     val book: Option[Book] = BookRepository.findById(id): Option[Book]
     implicit val messages: Messages = messagesApi.preferred(request)
 
-    bookForm.bindFromRequest.fill(book.get).fold(
+    book match {
+      case Some(value) =>
+        val filledForm = bookForm.fill(value)
+        Ok(views.html.books.edit(bookForm = filledForm, id = id))
+      case None =>
+        NotFound("Book not found")
+    }
+  }
+
+  // update
+  def update(id: Int): Action[AnyContent] = Action { implicit request =>
+    implicit val messages: Messages = messagesApi.preferred(request)
+    println("BooksController update is called")
+    bookForm.bindFromRequest().fold(
       formWithErrors => {
-        // Hatalı form tekrar gösterilsin
-        BadRequest(views.html.books.create(formWithErrors))
+        BadRequest(views.html.books.edit(bookForm = bookForm, id = id))
+//        Redirect(routes.BooksController.index()).flashing("failed" -> "Book not updated")
+
       },
-      bookData=>{
-        Redirect(routes.BooksController.index())
+      bookData => {
+        print(s"book data $bookData")
+        BookRepository.update(id, bookData.copy(id = id)) // id'yi sabit tut
+        Redirect(routes.BooksController.index()).flashing("success" -> "Book updated")
       }
     )
   }
 
-  // update
-  def update(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok("update")
-  }
 
   // destroy
   def destroy(id: Int): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>

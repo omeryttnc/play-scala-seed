@@ -17,7 +17,7 @@ GET     /books                      controllers.BooksController.index()
 GET     /books/create               controllers.BooksController.create()
 POST    /books/create               controllers.BooksController.save()
 GET     /books/edit/:id             controllers.BooksController.edit(id:Int)
-POST    /books/edit                 controllers.BooksController.update()
+POST    /books/edit/:id             controllers.BooksController.update(id:Int)
 GET     /books/delete/:id           controllers.BooksController.destroy(id:Int)
 GET     /books/:id                  controllers.BooksController.show(id:Int)
 
