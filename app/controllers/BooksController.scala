@@ -91,7 +91,14 @@ class BooksController @Inject()(val controllerComponents: ControllerComponents) 
 
   // for book details
   def show(id: Int): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok(s"show $id")
+    val book: Option[Book] = BookRepository.findById(id): Option[Book]
+    implicit val messages: Messages = messagesApi.preferred(request)
+
+    if (book == null)
+      NotFound("Book not found")
+    else
+      Ok(views.html.books.show(book.get))
+
   }
 
 }
