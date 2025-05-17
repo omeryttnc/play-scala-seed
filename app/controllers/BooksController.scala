@@ -41,7 +41,6 @@ class BooksController @Inject()(val controllerComponents: ControllerComponents) 
       formWithErrors => {
         // Hatalı form tekrar gösterilsin
         BadRequest(views.html.books.create(formWithErrors))
-        Redirect(routes.BooksController.index()).flashing("failed" -> "Book not saved")
       },
       bookData => {
         BookRepository.add(bookData)
@@ -53,7 +52,7 @@ class BooksController @Inject()(val controllerComponents: ControllerComponents) 
 
   // to edit
   def edit(id: Int): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    val book: Option[Book] = BookRepository.findById(id): Option[Book]
+    val book = BookRepository.findById(id)
     implicit val messages: Messages = messagesApi.preferred(request)
 
     book match {
@@ -71,8 +70,7 @@ class BooksController @Inject()(val controllerComponents: ControllerComponents) 
     println("BooksController update is called")
     bookForm.bindFromRequest().fold(
       formWithErrors => {
-        BadRequest(views.html.books.edit(bookForm = bookForm, id = id))
-//        Redirect(routes.BooksController.index()).flashing("failed" -> "Book not updated")
+        BadRequest(views.html.books.edit(bookForm = formWithErrors, id = id))
 
       },
       bookData => {
@@ -86,7 +84,8 @@ class BooksController @Inject()(val controllerComponents: ControllerComponents) 
 
   // destroy
   def destroy(id: Int): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok(s"destroy $id")
+    BookRepository.delete(id)
+    Redirect(routes.BooksController.index()).flashing("success" -> "Book deleted")
   }
 
   // for book details
@@ -94,10 +93,10 @@ class BooksController @Inject()(val controllerComponents: ControllerComponents) 
     val book: Option[Book] = BookRepository.findById(id): Option[Book]
     implicit val messages: Messages = messagesApi.preferred(request)
 
-    if (book == null)
-      NotFound("Book not found")
-    else
-      Ok(views.html.books.show(book.get))
+    book match {
+      case Some(b) => Ok(views.html.books.show(b))
+      case None    => NotFound("Book not found")
+    }
 
   }
 

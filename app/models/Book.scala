@@ -43,4 +43,13 @@ object BookRepository {
       true
     } else
       false
+      
+  def delete(id: Int): Unit = {
+    books.find(_.id == id) match {
+      case Some(_) =>
+        books = books.filterNot(_.id == id)
+      case None =>
+        println(s"Book with id $id not found.")
+    }
+  }
 }
