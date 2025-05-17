@@ -11,5 +11,7 @@
         <p>Author: @book.author</p>
         <p>Price: @book.price</p>
 
+        <a href="@routes.BooksController.edit(book.id)">Edit</a>
+        <a href="@routes.BooksController.destroy(book.id)">Delete</a>
     </body>
 </html>
