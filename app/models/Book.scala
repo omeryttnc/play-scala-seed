@@ -2,6 +2,7 @@ package models
 
 import play.api.data.Form
 
+
 case class Book(id: Int, title: String, price: Int, author: String)
 
 object BookRepository {

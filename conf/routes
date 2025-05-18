@@ -25,3 +25,6 @@ GET     /books/:id                  controllers.BooksController.show(id:Int)
 
 GET     /welcome/:name/:lastName    controllers.HomeController.welcomePage(name,lastName)
 
+
+GET     /user                       controllers.UserController.index
+GET     /add/:name/:email           controllers.UserController.addUser(name: String, email: String)
