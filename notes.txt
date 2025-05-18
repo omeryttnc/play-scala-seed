@@ -4,3 +4,4 @@ refactor yapilmasi gerekiyor
 layout bootsrap jquery eklenmesi gerekiyor
 default error eklenmesi gerekiyor
 uyari mesajlari eklenmesi gerekiyor
+delete ve put method larini ekle
