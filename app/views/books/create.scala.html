@@ -5,7 +5,7 @@
 @main("Create Book") {
     <h1>Create a New Book</h1>
 
-    @helper.form(action = routes.BooksController.save()) {
+    @helper.form(action = routes.BookController.save()) {
         @CSRF.formField // Bu satır, CSRF token'ını form'a ekler.
 
         @helper.inputText(bookForm("id"), Symbol("_label") -> "ID")

@@ -1,1 +1,6 @@
 debug -> sbt run -jvm-debug 9999
+
+refactor yapilmasi gerekiyor
+layout bootsrap jquery eklenmesi gerekiyor
+default error eklenmesi gerekiyor
+uyari mesajlari eklenmesi gerekiyor

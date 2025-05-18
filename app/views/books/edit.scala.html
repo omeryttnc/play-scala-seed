@@ -4,7 +4,7 @@
 @main("Edit Book") {
     <h1>Edit Book</h1>
 
-    @helper.form(action = routes.BooksController.update(id)) {
+    @helper.form(action = routes.BookController.update(id)) {
         @CSRF.formField
 
         <input type="hidden" name="id" value="@bookForm("id").value.getOrElse("")">

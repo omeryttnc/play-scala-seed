@@ -1,21 +1,18 @@
+@import models.Book
 @(books: List[Book])
 
-<html lang="en">
-<head>
-    <title>All Books</title>
-</head>
-<body>
-<h1>All Books</h1>
+@main("Books") {
+    <h1>Book List</h1>
+    <ul>
+    @for(book <- books) {
+        <li>
+            <strong>@book.title</strong> by @book.author - £@book.price
+            <a href="@routes.BookController.show(book.id.get)">Show</a>
+            <a href="@routes.BookController.edit(book.id.get)">Edit</a>
+            <a href="@routes.BookController.destroy(book.id.get)">Delete</a>
+        </li>
+    }
+    </ul>
 
-@for(book <- books) {
-<div>
-    <a href="@routes.BooksController.show(book.id)">@book.title</a>
-    <p>Price: @book.price</p>
-    <p>Author: @book.author</p>
-</div>
+    <a href="@routes.BookController.create()">Add New Book</a>
 }
-    <a href="@routes.BooksController.create()">Create</a>
-
-<p>Total Books: @books.size</p>
-</body>
-</html>

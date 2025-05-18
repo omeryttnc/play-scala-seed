@@ -13,13 +13,13 @@ GET     /about                      controllers.HomeController.about()
 
 
 # BOOKS
-GET     /books                      controllers.BooksController.index()
-GET     /books/create               controllers.BooksController.create()
-POST    /books/create               controllers.BooksController.save()
-GET     /books/edit/:id             controllers.BooksController.edit(id:Int)
-POST    /books/edit/:id             controllers.BooksController.update(id:Int)
-GET     /books/delete/:id           controllers.BooksController.destroy(id:Int)
-GET     /books/:id                  controllers.BooksController.show(id:Int)
+GET     /books                      controllers.BookController.index()
+GET     /books/create               controllers.BookController.create()
+POST    /books/save                 controllers.BookController.save()
+GET     /books/edit/:id             controllers.BookController.edit(id:Int)
+POST    /books/edit/:id             controllers.BookController.update(id:Int)
+GET     /books/delete/:id           controllers.BookController.destroy(id:Int)
+GET     /books/:id                  controllers.BookController.show(id:Int)
 
 
 

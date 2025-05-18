@@ -10,7 +10,8 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 libraryDependencies ++= Seq(
   guice,
-  "com.typesafe.slick" %% "slick" % "3.6.1",
-  "com.typesafe.slick" %% "slick-hikaricp" % "3.6.1",
+  guice,
+  "com.typesafe.play" %% "play-slick" % "5.4.0",
+  "com.typesafe.play" %% "play-slick-evolutions" % "5.4.0",
   "org.xerial" % "sqlite-jdbc" % "3.49.1.0"
 )

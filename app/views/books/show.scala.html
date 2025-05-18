@@ -6,6 +6,6 @@
     <p>Author: @book.author</p>
     <p>Price: @book.price</p>
 
-    <a href="@routes.BooksController.edit(book.id)">Edit</a>
-    <a href="@routes.BooksController.destroy(book.id)">Delete</a>
+    <a href="@routes.BookController.edit(book.id.get)">Edit</a>
+    <a href="@routes.BookController.destroy(book.id.get)">Delete</a>
 }
